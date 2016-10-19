@@ -21,5 +21,5 @@ Execute Tests
 =============
 
 `````
-./TrisTest
+make test
 `````
