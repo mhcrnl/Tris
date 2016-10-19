@@ -63,19 +63,34 @@ void testFirstPlayerIsCross() {
 void testCannotAddNoughtFirst() {
     tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
     new_game(t);
-    assert(t->next == Cross);
     assert(0 != add(t, Nought, 0, 1));
     tests++;
 }
 
+void testCanCompleteGame() {
+    tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
+    new_game(t);
+    assert(0 == add(t, Cross, 0, 0));
+    assert(0 == add(t, Nought, 0, 1));
+    assert(0 == add(t, Cross, 0, 2));
+    assert(0 == add(t, Nought, 1, 0));
+    assert(0 == add(t, Cross, 1, 1));
+    assert(0 == add(t, Nought, 1, 2));
+    assert(0 == add(t, Cross, 2, 0));
+    assert(0 == add(t, Nought, 2, 1));
+    assert(0 == add(t, Cross, 2, 2));
+    tests++;
+}
+
 int main() {
-    availableTests = 6;
+    availableTests = 7;
     testTrisHasBeenInitialized();
     testTrisBoardIsEmpty();
     testFirstPlayerIsCross();
     testCanAddOneCross();
     testGetIndex();
     testCannotAddNoughtFirst();
+    testCanCompleteGame();
     fprintf(stdout, "%d of %d tests completed\n", tests, availableTests);
     return 0;
 }

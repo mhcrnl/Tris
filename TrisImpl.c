@@ -29,6 +29,11 @@ int add(tris_t* grid, mark_e mark, int row, int column)
     grid->placedSymbols+=1;
     int i = getIndex(row, column);
     grid->grid[i] = mark;
+    if (grid->next == Cross) {
+    	grid->next = Nought;
+    } else {
+    	grid->next = Cross;
+    }
     return 0;
 }
 
