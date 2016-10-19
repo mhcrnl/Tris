@@ -3,10 +3,19 @@
 #include <stdio.h>
 #include <assert.h>
 
+int availableTests = 0;
 int tests = 0;
+
+void testTrisHasBeenInitialized() {
+    tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
+    new_game(t);
+    assert(t->initialized != 0);
+    tests++;
+}
 
 void testTrisBoardIsEmpty() {
     tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
+    new_game(t);
     assert(t->placedSymbols == 0);
     for (int i = 0; i < 9; i++) {
         assert(t->grid[i] == None);
@@ -16,6 +25,7 @@ void testTrisBoardIsEmpty() {
 
 void testCanAddOneCross() {
     tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
+    new_game(t);
     add(t, Cross, 0, 0);
     assert(t->placedSymbols == 1);
     mark_e mark = get(t, 0, 0);
@@ -51,10 +61,12 @@ void testFirstPlayerIsCross() {
 }
 
 int main() {
+    availableTests = 5;
+    testTrisHasBeenInitialized();
     testTrisBoardIsEmpty();
     testFirstPlayerIsCross();
     testCanAddOneCross();
     testGetIndex();
-    fprintf(stdout, "%d tests completed\n", tests);
+    fprintf(stdout, "%d of %d tests completed\n", tests, availableTests);
     return 0;
 }

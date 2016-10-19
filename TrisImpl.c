@@ -1,4 +1,5 @@
 #include "TrisImpl.h"
+#include <stdio.h>
 
 #define SIZE 3
 
@@ -10,6 +11,7 @@ int getIndex(int row, int column)
 void new_game(tris_t* grid)
 {
     grid->next = Cross;
+    grid->initialized = 1;
 }
 
 /**
@@ -17,6 +19,10 @@ void new_game(tris_t* grid)
   */
 int add(tris_t* grid, mark_e mark, int row, int column)
 {
+    if (grid->initialized == 0) {
+        fprintf(stderr, "please call new_game(tris_t*) first\n");
+        return -1;
+    }
     if (grid->next != mark) {
         return -1;
     }
@@ -28,5 +34,9 @@ int add(tris_t* grid, mark_e mark, int row, int column)
 
 mark_e get(tris_t* grid, int row, int column)
 {
+    if (grid->initialized == 0) {
+        fprintf(stderr, "please call new_game(tris_t*) first\n");
+        return -1;
+    }
     return grid->grid[getIndex(row, column)];
 }
