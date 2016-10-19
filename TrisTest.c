@@ -98,8 +98,16 @@ void testCannotAddMoreThanNineMarks() {
     tests++;
 }
 
+void testCannotAddIntoAnOccupiedBox() {
+    tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
+    new_game(t);
+    assert(0 == add(t, Cross, 0, 0));
+    assert(0 != add(t, Nought, 0, 0));
+    tests++;
+}
+
 int main() {
-    availableTests = 8;
+    availableTests = 9;
     testTrisHasBeenInitialized();
     testTrisBoardIsEmpty();
     testFirstPlayerIsCross();
@@ -108,6 +116,7 @@ int main() {
     testCannotAddNoughtFirst();
     testCanCompleteGame();
     testCannotAddMoreThanNineMarks();
+    testCannotAddIntoAnOccupiedBox();
     fprintf(stdout, "%d of %d tests completed\n", tests, availableTests);
     return 0;
 }

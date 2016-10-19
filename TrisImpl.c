@@ -12,6 +12,9 @@ void new_game(tris_t* grid)
 {
     grid->next = Cross;
     grid->initialized = 1;
+    for (int i = 0; i < MAX_SYMBOLS; i++) {
+        grid->grid[i] = None;
+    }
 }
 
 /**
@@ -30,6 +33,9 @@ int add(tris_t* grid, mark_e mark, int row, int column)
         return -1;
     }
     int i = getIndex(row, column);
+    if (grid->grid[i] != None) {
+        return -1;
+    }
     grid->grid[i] = mark;
     if (grid->next == Cross) {
     	grid->next = Nought;
