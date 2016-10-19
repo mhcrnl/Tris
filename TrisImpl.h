@@ -1,5 +1,7 @@
 #include "Tris.h"
 
+#define MAX_SYMBOLS 9
+
 enum mark_e {
    None,
    Cross,
@@ -8,7 +10,7 @@ enum mark_e {
 
 struct tris_t {
     int placedSymbols;
-    int grid[9];
+    int grid[MAX_SYMBOLS];
     mark_e next;
     int initialized;
 };

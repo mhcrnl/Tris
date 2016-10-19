@@ -23,10 +23,12 @@ int add(tris_t* grid, mark_e mark, int row, int column)
         fprintf(stderr, "please call new_game(tris_t*) first\n");
         return -1;
     }
+    if (grid->placedSymbols >= MAX_SYMBOLS) {
+        return -1;
+    }
     if (grid->next != mark) {
         return -1;
     }
-    grid->placedSymbols+=1;
     int i = getIndex(row, column);
     grid->grid[i] = mark;
     if (grid->next == Cross) {
@@ -34,6 +36,7 @@ int add(tris_t* grid, mark_e mark, int row, int column)
     } else {
     	grid->next = Cross;
     }
+    grid->placedSymbols+=1;
     return 0;
 }
 
