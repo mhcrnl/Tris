@@ -106,8 +106,34 @@ void testCannotAddIntoAnOccupiedBox() {
     tests++;
 }
 
+void testCanDetectWonGame() {
+    tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
+    new_game(t);
+    /**
+      This game is won by X at 7th move
+      XOX
+      OXO
+      X
+     */
+    assert(0 == add(t, Cross, 0, 0));
+    assert(t->winner == None);
+    assert(0 == add(t, Nought, 0, 1));
+    assert(t->winner == None);
+    assert(0 == add(t, Cross, 0, 2));
+    assert(t->winner == None);
+    assert(0 == add(t, Nought, 1, 0));
+    assert(t->winner == None);
+    assert(0 == add(t, Cross, 1, 1));
+    assert(t->winner == None);
+    assert(0 == add(t, Nought, 1, 2));
+    assert(t->winner == None);
+    assert(0 == add(t, Cross, 2, 0));
+    assert(t->winner == Cross);
+    tests++;
+}
+
 int main() {
-    availableTests = 9;
+    availableTests = 10;
     testTrisHasBeenInitialized();
     testTrisBoardIsEmpty();
     testFirstPlayerIsCross();
@@ -117,6 +143,7 @@ int main() {
     testCanCompleteGame();
     testCannotAddMoreThanNineMarks();
     testCannotAddIntoAnOccupiedBox();
+    testCanDetectWonGame();
     fprintf(stdout, "%d of %d tests completed\n", tests, availableTests);
     return 0;
 }
