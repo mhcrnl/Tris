@@ -3,7 +3,23 @@
 
 #define SIZE 3
 
-mark_e getWinner(tris_t* grid) {
+mark_e verifyLine(int* grid, int* line) {
+    int completed = 1;
+    mark_e first = grid[line[0]];
+    for (int i = 1; i < SIZE; i++) {
+        if (grid[line[i]] !=  first) {
+            return None;
+        } else {
+            completed++;
+        }
+    }
+    if (completed == SIZE) {
+        return first;
+    }
+    return None;
+}
+
+mark_e getWinner(int* grid) {
     int row0[3] = {0,1,2};
     int row1[3] = {3,4,5};
     int row2[3] = {6,7,8};
@@ -13,18 +29,11 @@ mark_e getWinner(tris_t* grid) {
     int diag0[3] = {0,4,8};
     int diag1[3] = {2,4,6};
 
-    int diag1_completed = 1;
-    mark_e first = grid->grid[diag1[0]];
-    for (int i = 1; i < SIZE; i++) {
-        if (grid->grid[diag1[i]] !=  first) {
-            return None;
-        } else {
-            diag1_completed++;
-        }
-    }
-    if (diag1_completed == SIZE) {
-        return first;
-    }
+    mark_e retval = verifyLine(grid, diag1);
+    if (retval != None) {
+        return retval;
+    } 
+
     return None;
 }
 
@@ -72,7 +81,7 @@ int add(tris_t* grid, mark_e mark, int row, int column)
     	grid->next = Cross;
     }
     grid->placedSymbols+=1;
-    grid->winner = getWinner(grid);
+    grid->winner = getWinner(grid->grid);
     return 0;
 }
 
