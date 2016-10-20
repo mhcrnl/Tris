@@ -20,16 +20,18 @@ mark_e verifyLine(int* grid, int* line) {
 }
 
 mark_e getWinner(int* grid) {
-    int row0[3] = {0,1,2};
-    int row1[3] = {3,4,5};
-    int row2[3] = {6,7,8};
-    int col0[3] = {0,3,6};
-    int col1[3] = {1,4,7};
-    int col2[3] = {2,5,8};
-    int diag0[3] = {0,4,8};
-    int diag1[3] = {2,4,6};
+    int winnerLines[8][3] = {
+        {0,1,2},
+        {3,4,5},
+        {6,7,8},
+        {0,3,6},
+        {1,4,7},
+        {2,5,8},
+        {0,4,8},
+        {2,4,6}
+    };
 
-    mark_e retval = verifyLine(grid, diag1);
+    mark_e retval = verifyLine(grid, winnerLines[7]);
     if (retval != None) {
         return retval;
     } 
