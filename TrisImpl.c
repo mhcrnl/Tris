@@ -4,6 +4,27 @@
 #define SIZE 3
 
 mark_e getWinner(tris_t* grid) {
+    int row0[3] = {0,1,2};
+    int row1[3] = {3,4,5};
+    int row2[3] = {6,7,8};
+    int col0[3] = {0,3,6};
+    int col1[3] = {1,4,7};
+    int col2[3] = {2,5,8};
+    int diag0[3] = {0,4,8};
+    int diag1[3] = {2,4,6};
+
+    int diag1_completed = 1;
+    mark_e first = grid->grid[diag1[0]];
+    for (int i = 1; i < SIZE; i++) {
+        if (grid->grid[diag1[i]] !=  first) {
+            return None;
+        } else {
+            diag1_completed++;
+        }
+    }
+    if (diag1_completed == SIZE) {
+        return first;
+    }
     return None;
 }
 

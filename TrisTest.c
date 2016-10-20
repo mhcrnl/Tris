@@ -70,14 +70,20 @@ void testCannotAddNoughtFirst() {
 void testCanCompleteGame() {
     tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
     new_game(t);
+    /**
+      This game is not won by none of the players
+      XOX
+      XOO
+      OXX
+     */
     assert(0 == add(t, Cross, 0, 0));
-    assert(0 == add(t, Nought, 0, 1));
+    assert(0 == add(t, Nought, 1, 1));
     assert(0 == add(t, Cross, 0, 2));
-    assert(0 == add(t, Nought, 1, 0));
-    assert(0 == add(t, Cross, 1, 1));
+    assert(0 == add(t, Nought, 0, 1));
+    assert(0 == add(t, Cross, 2, 1));
     assert(0 == add(t, Nought, 1, 2));
-    assert(0 == add(t, Cross, 2, 0));
-    assert(0 == add(t, Nought, 2, 1));
+    assert(0 == add(t, Cross, 1, 0));
+    assert(0 == add(t, Nought, 2, 0));
     assert(0 == add(t, Cross, 2, 2));
     tests++;
 }
@@ -85,14 +91,20 @@ void testCanCompleteGame() {
 void testCannotAddMoreThanNineMarks() {
     tris_t* t = (tris_t*) calloc(1, sizeof(tris_t));
     new_game(t);
+    /**
+      This game is not won by none of the players
+      XOX
+      XOO
+      OXX
+     */
     assert(0 == add(t, Cross, 0, 0));
-    assert(0 == add(t, Nought, 0, 1));
+    assert(0 == add(t, Nought, 1, 1));
     assert(0 == add(t, Cross, 0, 2));
-    assert(0 == add(t, Nought, 1, 0));
-    assert(0 == add(t, Cross, 1, 1));
+    assert(0 == add(t, Nought, 0, 1));
+    assert(0 == add(t, Cross, 2, 1));
     assert(0 == add(t, Nought, 1, 2));
-    assert(0 == add(t, Cross, 2, 0));
-    assert(0 == add(t, Nought, 2, 1));
+    assert(0 == add(t, Cross, 1, 0));
+    assert(0 == add(t, Nought, 2, 0));
     assert(0 == add(t, Cross, 2, 2));
     assert(0 != add(t, Nought, 3, 0));
     tests++;
